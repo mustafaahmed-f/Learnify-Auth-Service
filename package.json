@@ -10,7 +10,8 @@
     "prod": "node dist/index.js",
     "dev": "node --loader ts-node/esm src/index.ts",
     "local:watch": "nodemon --watch src --ext ts --exec \"node --loader ts-node/esm src/index.ts\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "node --loader ts-node/esm scripts/generate-commit.ts"
   },
   "keywords": [],
   "author": "sezRR",

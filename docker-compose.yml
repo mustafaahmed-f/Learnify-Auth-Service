@@ -8,6 +8,5 @@ services:
 
 networks:
   node-typesript-network:
-
-volumes:
-  node-typescript-volume:
+# volumes:
+#   node-typescript-volume:
