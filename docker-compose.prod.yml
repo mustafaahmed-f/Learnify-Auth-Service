@@ -1,6 +1,6 @@
 services:
-  node-typescrip:
-    image: node-typescript:prod
+  auth-service:
+    image: auth-service:prod
     build:
       context: .
       target: production

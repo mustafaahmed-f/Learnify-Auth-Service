@@ -1,6 +1,6 @@
 services:
-  node-typescrip:
-    image: node-typescript:build
+  auth-service:
+    image: auth-service:build
     build:
       context: .
       target: builder

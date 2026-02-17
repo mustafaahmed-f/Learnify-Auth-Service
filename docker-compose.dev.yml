@@ -1,14 +1,14 @@
 services:
-  node-typescript:
-    # container_name: node-typescript
+  auth-service:
+    # container_name: auth-service
     build:
       context: .
       target: development
     # env_file:
     #   - ./.env
-    image: node-typescript:dev
+    image: auth-service:dev
     ports:
-      - "5001:5001"
+      - "7001:7001"
     volumes:
       - .:/app
       - /app/node_modules # prevents node_modules overwrite.
