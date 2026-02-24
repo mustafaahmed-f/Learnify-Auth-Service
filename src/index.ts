@@ -1,13 +1,26 @@
 import dotenv from "dotenv";
-import express from "express";
-const app = express();
+import express, { Application } from "express";
+import { initiateApp } from "./intiateApp.js";
 dotenv.config();
 
-app.use(express.json());
-app.get("/", (req, res) => res.send("Hello world !!"));
+const app: Application = express();
 
-app.listen(process.env.PORT, () =>
-  console.log(`Server is running on port ${process.env.PORT}`),
-);
+try {
+  initiateApp(app);
+} catch (error) {
+  console.log("Auth service error : ", error);
+}
 
-console.log("Running ...... ");
+process.on("unhandledRejection", (reason, p) => {
+  console.error("Unhandled Promise Rejection:", reason);
+});
+
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
+
+process.on("uncaughtExceptionMonitor", (err) => {
+  console.error("Uncaught Exception (Monitor):", err);
+});
+
+export default app;

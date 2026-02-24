@@ -17,7 +17,10 @@
   "author": "sezRR",
   "license": "ISC",
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^20.19.33",
     "nodemon": "^3.0.1",
     "prisma": "^7.4.0",
@@ -28,7 +31,10 @@
     "@clerk/express": "^1.7.74",
     "@prisma/adapter-mariadb": "^7.4.0",
     "@prisma/client": "^7.4.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
     "dotenv": "^17.3.1",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "morgan": "^1.10.1"
   }
 }
