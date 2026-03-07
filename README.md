@@ -17,7 +17,7 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
    ```
 
 2. Navigate to the project directory:
-  
+
    ```bash
    cd nodejs-typescript-template
    ```
@@ -34,9 +34,9 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
 
 To run the project in development mode with automatic code reloading, use:
 
-   ```bash
-   npm run dev
-   ```
+```bash
+npm run dev
+```
 
 This command uses [nodemon](https://nodemon.io/) to watch for changes in the `src/` directory and restarts the server accordingly.
 
@@ -44,9 +44,9 @@ This command uses [nodemon](https://nodemon.io/) to watch for changes in the `sr
 
 To build the TypeScript source code, use:
 
-   ```bash
-   npm run build
-   ```
+```bash
+npm run build
+```
 
 This command compiles TypeScript files from the `src/` directory to the `dist/` directory.
 
@@ -54,20 +54,18 @@ This command compiles TypeScript files from the `src/` directory to the `dist/` 
 
 To run the built application in production, use:
 
-   ```bash
-   npm run prod
-   ```
+```bash
+npm run prod
+```
 
 This command executes the compiled `index.js` file from the `dist/` directory.
 
 ## Project Structure
 
 - `src/`: Contains the source code of the application.
-    
-    - `index.ts`: Main entry point of the application.
-    - `helloWorld.ts`: Example module demonstrating TypeScript functionality.
+  - `index.ts`: Main entry point of the application.
+  - `helloWorld.ts`: Example module demonstrating TypeScript functionality.
 - `dist/`: Output directory where the compiled JavaScript files are stored.
-    
 
 ## Configuration Files
 

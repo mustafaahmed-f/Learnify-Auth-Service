@@ -24,9 +24,7 @@ if (!Object.keys(typeIcons).includes(type)) {
 }
 
 if (!type || !scope || messageParts.length === 0) {
-  console.log(
-    `❌ Usage: ts-node scripts/generate-commit.ts <type> <scope> <message>`,
-  );
+  console.log(`❌ Usage: ts-node scripts/generate-commit.ts <type> <scope> <message>`);
   process.exit(1);
 }
 
