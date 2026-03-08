@@ -4,7 +4,7 @@ import morgan from "morgan";
 import { clerkMiddleware } from "@clerk/express";
 import express, { Application, Request, Response } from "express";
 import { MainAppName } from "./utils/constants/mainAppName.js";
-import { globalErrorHandler } from "./utils/helperMethods/globalErrorHandler.js";
+import webhookRouter from "./routes/webhook.route.js";
 
 export async function initiateApp(app: Application) {
   const baseURL = `/${MainAppName}`;
@@ -34,11 +34,12 @@ export async function initiateApp(app: Application) {
     return res.send(`Hello ${MainAppName}!!`);
   });
 
+  app.use(baseURL, webhookRouter);
+
   app.use("/{*any}", (req: Request, res: Response) => {
-    res.status(404).json({ error: "In-valid routing .. " });
+    res.status(404).json({ error: "Auth service in-valid routing .. " });
   });
 
-  app.use(globalErrorHandler);
   app.listen(port, () =>
     console.log(`Server is running on port ${process.env.PORT}`),
   );

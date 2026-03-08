@@ -26,7 +26,8 @@
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.1.0",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "svix": "^1.86.0"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.10",
