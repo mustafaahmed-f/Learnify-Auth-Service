@@ -1,5 +1,6 @@
 import { Response } from "express";
 import { prisma } from "../../services/prismaClient.js";
+import { clerkClient } from "@clerk/express";
 
 export async function clerkEventHandler(event: any, res: Response) {
   switch (event.type) {
@@ -26,6 +27,12 @@ export async function clerkEventHandler(event: any, res: Response) {
       if (!result) {
         throw new Error("Failed to add user !!");
       }
+
+      await clerkClient.users.updateUserMetadata(id, {
+        publicMetadata: {
+          role: result.role,
+        },
+      });
       console.log("✅ User has been added to DB:", id);
       return res.status(200).json({ success: true });
     }
