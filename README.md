@@ -187,6 +187,7 @@ Stores all synchronized user information from Clerk.
 | `firstName` | String   | -                 | User's first name                |
 | `lastName`  | String   | -                 | User's last name                 |
 | `img`       | String   | Default: `""`     | User's profile image URL         |
+| `role`      | String   | Default: STUDENT  | User's role in the system        |
 | `createdAt` | DateTime | Auto-generated    | Record creation timestamp        |
 | `updatedAt` | DateTime | Auto-updated      | Record last update timestamp     |
 
