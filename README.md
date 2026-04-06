@@ -160,6 +160,14 @@ Receives webhook events from Clerk and processes user synchronization.
 
 ---
 
+### Update User Role
+
+**PUT** `/api/users/:userId/role`
+
+Updates the role of a user in the database.
+
+---
+
 ## Webhook Events & Logic
 
 The service automatically processes three types of Clerk webhook events:
