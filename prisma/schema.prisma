@@ -24,5 +24,13 @@ model User {
   email     String   @unique
   img       String   @default("")
 
+  role Role @default(STUDENT)
+
   @@unique([clerkId, userName, email])
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  ADMIN
 }
