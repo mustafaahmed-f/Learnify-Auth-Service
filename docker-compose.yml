@@ -2,9 +2,11 @@ services:
   auth-service:
     container_name: auth-service
     environment:
-      - PORT=7000
+      - PORT=7001
     env_file:
       - ./.env
+    networks:
+      - auth-service-network
 
   mysql:
     image: mysql
@@ -22,7 +24,7 @@ services:
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: my-phpmyadmin-auth-service
-    restart: always
+    restart: unless-stopped # //* Doesn’t restart if you manually stop it
     ports:
       - "8080:80"
     environment:
@@ -36,3 +38,12 @@ networks:
   auth-service-network:
 volumes:
   auth-service-sql-data:
+
+# =======================================================================================
+# ============================== Commands ===============================================
+# =======================================================================================
+
+# docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+# docker-compose -f docker-compose.yml -f docker-compose.dev.yml down
+# docker exec -it blog-app bash
+# docker logs blog-app -f

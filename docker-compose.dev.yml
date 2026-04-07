@@ -1,6 +1,6 @@
 services:
   auth-service:
-    # container_name: auth-service
+    container_name: auth-service
     build:
       context: .
       target: development
@@ -8,8 +8,8 @@ services:
     #   - ./.env
     image: auth-service:dev
     ports:
-      - "7001:7001"
+      - "7001:7001" # //* HOST_PORT : CONTAINER_PORT
     volumes:
       - .:/app
-      - /app/node_modules # prevents node_modules overwrite.
+      - /app/node_modules # //* prevents node_modules overwrite.
     command: npm run local:watch

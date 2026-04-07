@@ -30,7 +30,7 @@ export async function initiateApp(app: Application) {
     }),
   );
 
-  app.get(`/`, (req: Request, res: Response) => {
+  app.get(baseURL, (req: Request, res: Response) => {
     return res.send(`Hello ${MainAppName}!!`);
   });
 
