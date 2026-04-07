@@ -162,7 +162,7 @@ Receives webhook events from Clerk and processes user synchronization.
 
 ### Update User Role
 
-**PUT** `/api/users/:userId/role`
+**PATCH** `/api/users/:userId/role`
 
 Updates the role of a user in the database.
 

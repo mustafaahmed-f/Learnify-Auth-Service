@@ -11,6 +11,6 @@ router.post(
   clerkWebhookHandler,
 );
 
-router.put(`/updateRole`, updateRole);
+router.patch(`/updateRole`, updateRole);
 
 export default router;
