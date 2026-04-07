@@ -34,5 +34,5 @@ export function handlePrismaError(error: any): {
     return { status: 400, message: `Invalid input data :  ${error}` };
   }
 
-  return { status: 500, message: `Unknown server error : ${error}` };
+  return { status: 500, message: `[Non-Prisma Error] : ${error}` };
 }
