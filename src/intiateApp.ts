@@ -1,16 +1,23 @@
+import { clerkMiddleware } from "@clerk/express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import morgan from "morgan";
-import { clerkMiddleware } from "@clerk/express";
 import express, { Application, Request, Response } from "express";
-import { MainAppName } from "./utils/constants/mainAppName.js";
+import morgan from "morgan";
+import { clerkWebhookHandler } from "./controllers/clerkWebHook.js";
 import authRouter from "./routes/auth.route.js";
+import { MainAppName } from "./utils/constants/mainAppName.js";
 
 export async function initiateApp(app: Application) {
   const baseURL = `/${MainAppName}`;
   const port = process.env.PORT || 7001;
 
   app.use(clerkMiddleware());
+
+  app.post(
+    `${baseURL}/webhooks/clerk`,
+    express.raw({ type: "application/json" }),
+    clerkWebhookHandler,
+  );
 
   app.use(express.json());
 

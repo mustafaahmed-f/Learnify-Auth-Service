@@ -8,12 +8,6 @@ const router = Router();
 
 router.use(clerkMiddleware());
 
-router.post(
-  `/webhooks/clerk`,
-  express.raw({ type: "application/json" }),
-  clerkWebhookHandler,
-);
-
 router.patch(`/updateRole`, updateRole);
 
 export default router;

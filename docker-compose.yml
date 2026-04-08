@@ -7,6 +7,9 @@ services:
       - ./.env
     networks:
       - auth-service-network
+    depends_on:
+      mysql:
+        condition: service_healthy
 
   mysql:
     image: mysql
@@ -14,6 +17,10 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: mypassword
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 5
     ports:
       - "3306:3306"
     volumes:
