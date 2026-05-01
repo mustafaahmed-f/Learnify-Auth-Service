@@ -46,17 +46,28 @@ export async function clerkEventHandler(event: any, res: Response) {
         image_url,
       } = event.data;
       let email_address = email_addresses[0].email_address;
-      let result = await prisma.user.update({
+      let role = event.data.public_metadata.role;
+      let result = await prisma.user.upsert({
         where: {
           email: email_address,
         },
-        data: {
+        update: {
           email: email_address,
           firstName: first_name ?? "",
           lastName: last_name ?? "",
           userName: username ?? "",
           clerkId: id,
           img: image_url,
+          role: role,
+        },
+        create: {
+          email: email_address,
+          firstName: first_name ?? "",
+          lastName: last_name ?? "",
+          userName: username ?? "",
+          clerkId: id,
+          img: image_url,
+          role: role,
         },
       });
       if (!result) {

@@ -31,6 +31,7 @@ export async function initiateApp(app: Application) {
   app.use(
     cors({
       origin: allowedOrigins,
+      // origin: "*",
       allowedHeaders: ["Content-Type", "Authorization", "x-client-id"],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // allow all methods you need
       credentials: true,
@@ -38,7 +39,7 @@ export async function initiateApp(app: Application) {
   );
 
   app.get(baseURL, (req: Request, res: Response) => {
-    return res.send(`Hello ${MainAppName}!!`);
+    return res.send(`Hello ${MainAppName} !!`);
   });
 
   app.use(baseURL, authRouter);
@@ -47,9 +48,7 @@ export async function initiateApp(app: Application) {
     res.status(404).json({ error: "Auth service in-valid routing .. " });
   });
 
-  app.listen(port, () =>
-    console.log(`Server is running on port ${process.env.PORT}`),
-  );
+  app.listen(port, () => console.log(`Server is running on port ${port}`));
 
   return app;
 }

@@ -1,11 +1,11 @@
 services:
-  auth-service:
-    container_name: auth-service
+  auth-service-dev:
+    # container_name: auth-service-dev
     build:
       context: .
       target: development
-    # env_file:
-    #   - ./.env
+    env_file:
+      - ./.env
     image: auth-service:dev
     ports:
       - "7001:7001" # //* HOST_PORT : CONTAINER_PORT
@@ -13,3 +13,50 @@ services:
       - .:/app
       - /app/node_modules # //* prevents node_modules overwrite.
     command: npm run local:watch
+    depends_on:
+      mysql-dev:
+        condition: service_healthy
+    networks:
+      - auth-service-network-dev
+
+  mysql-dev:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      retries: 5
+    ports:
+      - "3307:3306"
+    volumes:
+      - auth-service-sql-data-dev:/var/lib/mysql
+    networks:
+      - auth-service-network-dev
+
+  phpmyadmin-dev:
+    image: phpmyadmin:latest
+    restart: unless-stopped # //* Doesn’t restart if you manually stop it
+    environment:
+      PMA_HOST: mysql-dev
+      PMA_USER: root
+      PMA_PASSWORD: mypassword
+    ports:
+      - "8081:80"
+    depends_on:
+      mysql-dev:
+        condition: service_healthy
+    networks:
+      - auth-service-network-dev
+
+networks:
+  auth-service-network-dev:
+volumes:
+  auth-service-sql-data-dev:
+
+    #* docker-compose -f docker-compose.dev.yml up -d --build
+    #* docker-compose -f docker-compose.dev.yml down
+    #* docker exec -it blog-app bash
+    #* docker logs auth-service -f
+    #* cloudflared tunnel --url http://localhost:7001

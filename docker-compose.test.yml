@@ -1,0 +1,61 @@
+services:
+  auth-service-test:
+    # container_name: auth-service-test
+    build:
+      context: .
+      target: development
+    env_file:
+      - ./.env.test
+    image: auth-service:dev
+    ports:
+      - "7002:7001" # //* HOST_PORT : CONTAINER_PORT
+    volumes:
+      - .:/app
+      - /app/node_modules # //* prevents node_modules overwrite.
+    command: npm run local:watch
+    depends_on:
+      mysql-test:
+        condition: service_healthy
+    networks:
+      - auth-service-network-test
+
+  mysql-test:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      retries: 5
+    ports:
+      - "3308:3306"
+    volumes:
+      - auth-service-sql-data-test:/var/lib/mysql
+    networks:
+      - auth-service-network-test
+
+  phpmyadmin-test:
+    image: phpmyadmin:latest
+    restart: unless-stopped # //* Doesn’t restart if you manually stop it
+    environment:
+      PMA_HOST: mysql-test
+      PMA_USER: root
+      PMA_PASSWORD: mypassword
+    ports:
+      - "8082:80"
+    depends_on:
+      mysql-test:
+        condition: service_healthy
+    networks:
+      - auth-service-network-test
+
+networks:
+  auth-service-network-test:
+volumes:
+  auth-service-sql-data-test:
+
+    #* docker-compose -f docker-compose.test.yml up -d --build
+    #* docker-compose -f docker-compose.test.yml down
+    #* docker exec -it blog-app bash
+    #* docker logs auth-service -f

@@ -4,3 +4,6 @@ services:
     build:
       context: .
       target: builder
+
+#* How should we defined here volumes and networks ???
+#* And should we defined them here or in prod ????
