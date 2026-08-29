@@ -11,7 +11,7 @@ export async function initiateApp(app: Application) {
   const baseURL = `/${MainAppName}`;
   const port = process.env.PORT || 7001;
 
-  app.use(clerkMiddleware());
+  // app.use(clerkMiddleware());
 
   app.post(
     `${baseURL}/webhooks/clerk`,
@@ -33,7 +33,7 @@ export async function initiateApp(app: Application) {
       origin: allowedOrigins,
       // origin: "*",
       allowedHeaders: ["Content-Type", "Authorization", "x-client-id"],
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // allow all methods you need
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "QUERY"], // allow all methods you need
       credentials: true,
     }),
   );
@@ -48,7 +48,9 @@ export async function initiateApp(app: Application) {
     res.status(404).json({ error: "Auth service in-valid routing .. " });
   });
 
-  app.listen(port, () => console.log(`Server is running on port ${port}`));
+  app.listen(port, () =>
+    console.log(`${process.env.APP_PURPOSE} Server is running on port ${port}`),
+  );
 
   return app;
 }

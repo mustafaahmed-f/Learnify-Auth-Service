@@ -18,6 +18,7 @@ services:
         condition: service_healthy
     networks:
       - auth-service-network-dev
+      - learnify-shared-network
 
   mysql-dev:
     image: mysql:latest
@@ -25,7 +26,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: mypassword
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 5s
       retries: 5
     ports:
@@ -52,11 +53,15 @@ services:
 
 networks:
   auth-service-network-dev:
+    driver: bridge
+  learnify-shared-network:
+    external: true
 volumes:
   auth-service-sql-data-dev:
 
+    #* shared network : learnify-shared-network
     #* docker-compose -f docker-compose.dev.yml up -d --build
     #* docker-compose -f docker-compose.dev.yml down
     #* docker exec -it blog-app bash
-    #* docker logs auth-service -f
+    #* docker logs authservice-auth-service-dev-1 -f
     #* cloudflared tunnel --url http://localhost:7001
