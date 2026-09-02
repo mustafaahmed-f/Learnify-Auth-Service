@@ -31,6 +31,7 @@ export async function clerkEventHandler(event: any, res: Response) {
       await clerkClient.users.updateUserMetadata(id, {
         publicMetadata: {
           role: result.role,
+          dbUserId: result.id,
         },
       });
       console.log("✅ User has been added to DB:", id);

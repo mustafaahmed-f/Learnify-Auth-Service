@@ -11,7 +11,7 @@ export async function initiateApp(app: Application) {
   const baseURL = `/${MainAppName}`;
   const port = process.env.PORT || 7001;
 
-  // app.use(clerkMiddleware());
+  app.use(clerkMiddleware());
 
   app.post(
     `${baseURL}/webhooks/clerk`,
