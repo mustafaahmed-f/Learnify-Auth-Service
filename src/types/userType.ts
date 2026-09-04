@@ -1,8 +1,10 @@
+import { validRoles } from "../utils/constants/validRoles.js";
+
 export type ClerkUser = {
   clerkId: string;
 
   userMetadata: {
-    role: string;
+    role: (typeof validRoles)[number];
     dbUserId: string;
   };
 
