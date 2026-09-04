@@ -3,7 +3,6 @@ import { prisma } from "../services/prismaClient.js";
 import { handlePrismaError } from "../utils/helperMethods/handlePrismaError.js";
 import { clerkClient } from "@clerk/express";
 import { validRoles } from "../utils/constants/validRoles.js";
-import { checkIdAndUser } from "../utils/helperMethods/checkIdAndUser.js";
 
 export async function updateRole(
   req: Request,
@@ -12,8 +11,11 @@ export async function updateRole(
 ) {
   //todo : add a step to allow only admin or payment service to use this api
   try {
-    const user = await checkIdAndUser(req);
-    const { id: userId, clerkId } = user;
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthenticated. Login first please." });
+    }
+    const { userMetadata, clerkId } = req.user;
+    const userId = userMetadata?.dbUserId;
     const newRole = req.body?.role;
 
     if (!newRole || newRole.length === 0)

@@ -6,6 +6,7 @@ import morgan from "morgan";
 import { clerkWebhookHandler } from "./controllers/clerkWebHook.js";
 import authRouter from "./routes/auth.route.js";
 import { MainAppName } from "./utils/constants/mainAppName.js";
+import { globalErrorHandler } from "./utils/GlobalErrorHandler.js";
 
 export async function initiateApp(app: Application) {
   const baseURL = `/${MainAppName}`;
@@ -47,6 +48,8 @@ export async function initiateApp(app: Application) {
   app.use("/{*any}", (req: Request, res: Response) => {
     res.status(404).json({ error: "Auth service in-valid routing .. " });
   });
+
+  app.use(globalErrorHandler);
 
   app.listen(port, () =>
     console.log(`${process.env.APP_PURPOSE} Server is running on port ${port}`),
