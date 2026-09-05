@@ -6,7 +6,7 @@ import morgan from "morgan";
 import { clerkWebhookHandler } from "./controllers/clerkWebHook.js";
 import authRouter from "./routes/auth.route.js";
 import { MainAppName } from "./utils/constants/mainAppName.js";
-import { globalErrorHandler } from "./utils/GlobalErrorHandler.js";
+import { globalErrorHandler } from "@mustafahmed1997/learnify-backend";
 
 export async function initiateApp(app: Application) {
   const baseURL = `/${MainAppName}`;

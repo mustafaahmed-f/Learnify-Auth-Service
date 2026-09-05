@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { prisma } from "../services/prismaClient.js";
 import { handlePrismaError } from "../utils/helperMethods/handlePrismaError.js";
 import { clerkClient } from "@clerk/express";
-import { validRoles } from "../utils/constants/validRoles.js";
+import { validRoles } from "@mustafahmed1997/learnify-backend";
 
 export async function updateRole(
   req: Request,
@@ -12,7 +12,9 @@ export async function updateRole(
   //todo : add a step to allow only admin or payment service to use this api
   try {
     if (!req.user) {
-      return res.status(401).json({ message: "Unauthenticated. Login first please." });
+      return res
+        .status(401)
+        .json({ message: "Unauthenticated. Login first please." });
     }
     const { userMetadata, clerkId } = req.user;
     const userId = userMetadata?.dbUserId;
