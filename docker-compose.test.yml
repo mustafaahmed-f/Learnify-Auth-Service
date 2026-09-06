@@ -6,6 +6,8 @@ services:
       target: development
     env_file:
       - ./.env.test
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     image: auth-service:dev
     # ports:
     #   - "7002:7001" # //* HOST_PORT : CONTAINER_PORT
