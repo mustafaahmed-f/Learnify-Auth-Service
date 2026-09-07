@@ -16,9 +16,11 @@ export async function updateRole(
         .status(401)
         .json({ message: "Unauthenticated. Login first please." });
     }
-    const { userMetadata, clerkId } = req.user;
-    const userId = userMetadata?.dbUserId;
+
     const newRole = req.body?.role;
+    const targetUser = req.body?.targetUser; //* The User's id whose role need to be updated
+
+    //todo : add a validation using zod instead of these two conditions ..
 
     if (!newRole || newRole.length === 0)
       return res.status(400).json({ message: "Role is required !!" });
@@ -26,19 +28,23 @@ export async function updateRole(
     if (!validRoles.includes(newRole))
       return res.status(400).json({ message: "Invalid role !!" });
 
-    const result = await prisma.user.update({
+    //===========================================
+
+    const updatedUser = await prisma.user.update({
       where: {
-        clerkId,
-        id: userId,
+        id: targetUser,
       },
       data: {
         role: newRole,
       },
     });
 
-    if (!result) return res.status(404).json({ message: "User not found !!" });
+    if (!updatedUser)
+      return res
+        .status(404)
+        .json({ message: "User not found or failed to update role !!" });
 
-    await clerkClient.users.updateUserMetadata(clerkId, {
+    await clerkClient.users.updateUserMetadata(updatedUser.clerkId, {
       publicMetadata: {
         role: newRole,
       },
