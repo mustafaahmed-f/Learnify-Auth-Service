@@ -64,6 +64,6 @@ volumes:
     #* shared network : learnify-shared-network
     #* docker-compose -f docker-compose.dev.yml up -d --build
     #* docker-compose -f docker-compose.dev.yml down
-    #* docker exec -it blog-app bash
+    #* docker exec -it authservice-auth-service-dev-1 bash
     #* docker logs authservice-auth-service-dev-1 -f
     #* cloudflared tunnel --url http://localhost:7001
