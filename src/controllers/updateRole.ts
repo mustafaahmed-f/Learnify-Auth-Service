@@ -49,3 +49,40 @@ export async function updateRole(
     });
   }
 }
+
+/*
+
+* Student → Instructor : 
+
+ Student
+*   ↓
+ Instructor Request
+*   ↓
+ Admin approves
+*   ↓
+ Instructor
+
+===========================================
+
+* Student → Admin OR  Instructor → Admin
+* Only a privileged administrative operation.
+  
+ Admin
+*   ↓
+ grant admin
+*   ↓
+ User becomes ADMIN 
+
+ Admin
+*   ↓
+ grant admin
+*   ↓
+ Instructor becomes ADMIN
+
+*/
+
+/*
+ * LAter we will use something called status
+ * Ex :  role = INSTRUCTOR , instructorStatus = ACTIVE - SUSPENDED - REVOKED
+ *
+ */
