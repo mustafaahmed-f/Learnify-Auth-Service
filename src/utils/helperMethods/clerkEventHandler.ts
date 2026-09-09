@@ -14,6 +14,8 @@ export async function clerkEventHandler(event: any, res: Response) {
         image_url,
       } = event.data;
       let email_address = email_addresses[0].email_address;
+
+      //todo : allow transitions to avoid non-consistent data
       let result = await prisma.user.create({
         data: {
           email: email_address,
@@ -28,9 +30,20 @@ export async function clerkEventHandler(event: any, res: Response) {
         throw new Error("Failed to add user !!");
       }
 
+      let newRole = await prisma.userRole.create({
+        data: {
+          role: "STUDENT",
+          userId: result.id,
+        },
+      });
+
+      if (!newRole) {
+        throw new Error("Failed to add user role !!");
+      }
+
       await clerkClient.users.updateUserMetadata(id, {
         publicMetadata: {
-          role: result.role,
+          roles: ["STUDENT"],
           dbUserId: result.id,
         },
       });
@@ -47,7 +60,7 @@ export async function clerkEventHandler(event: any, res: Response) {
         image_url,
       } = event.data;
       let email_address = email_addresses[0].email_address;
-      let role = event.data.public_metadata.role;
+
       let result = await prisma.user.upsert({
         where: {
           email: email_address,
@@ -59,7 +72,6 @@ export async function clerkEventHandler(event: any, res: Response) {
           userName: username ?? "",
           clerkId: id,
           img: image_url,
-          role: role,
         },
         create: {
           email: email_address,
@@ -68,7 +80,6 @@ export async function clerkEventHandler(event: any, res: Response) {
           userName: username ?? "",
           clerkId: id,
           img: image_url,
-          role: role,
         },
       });
       if (!result) {
