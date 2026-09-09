@@ -24,9 +24,20 @@ model User {
   email     String   @unique
   img       String   @default("")
 
-  role Role @default(STUDENT)
+  roles UserRole[]
 
   @@unique([clerkId, userName, email])
+}
+
+model UserRole {
+  id     String @id @default(cuid())
+  userId String
+  role   Role   @default(STUDENT)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, role])
+  @@index([userId])
 }
 
 enum Role {
