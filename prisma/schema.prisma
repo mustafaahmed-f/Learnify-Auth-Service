@@ -42,6 +42,32 @@ model UserRole {
   @@index([userId])
 }
 
+model OutboxEvent {
+  id          String          @id @default(cuid())
+  type        OutboxEventType
+  aggregateId String
+  payload     Json
+  status      OutboxStatus    @default(PENDING)
+  attempts    Int             @default(0)
+  createdAt   DateTime        @default(now())
+  processedAt DateTime?
+  lastError   String?
+
+  @@index([status, createdAt])
+}
+
+enum OutboxStatus {
+  PENDING
+  PROCESSED
+  FAILED
+}
+
+enum OutboxEventType {
+  USER_ROLES_UPDATED
+  USER_BLOCKED
+  USER_UNBLOCKED
+}
+
 enum Role {
   STUDENT
   INSTRUCTOR

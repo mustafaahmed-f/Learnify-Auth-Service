@@ -9,6 +9,24 @@
 * 🟢 You can import this file directly.
 */
 
+export const OutboxStatus = {
+  PENDING: 'PENDING',
+  PROCESSED: 'PROCESSED',
+  FAILED: 'FAILED'
+} as const
+
+export type OutboxStatus = (typeof OutboxStatus)[keyof typeof OutboxStatus]
+
+
+export const OutboxEventType = {
+  USER_ROLES_UPDATED: 'USER_ROLES_UPDATED',
+  USER_BLOCKED: 'USER_BLOCKED',
+  USER_UNBLOCKED: 'USER_UNBLOCKED'
+} as const
+
+export type OutboxEventType = (typeof OutboxEventType)[keyof typeof OutboxEventType]
+
+
 export const Role = {
   STUDENT: 'STUDENT',
   INSTRUCTOR: 'INSTRUCTOR',
