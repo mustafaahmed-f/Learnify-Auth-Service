@@ -64,6 +64,7 @@ export async function clerkEventHandler(event: any, res: Response) {
       let result = await prisma.user.upsert({
         where: {
           email: email_address,
+          clerkId: id,
         },
         update: {
           email: email_address,

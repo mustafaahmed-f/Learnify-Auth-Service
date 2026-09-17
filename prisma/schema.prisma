@@ -24,6 +24,8 @@ model User {
   email     String   @unique
   img       String   @default("")
 
+  status UserStatus @default(ACTIVE)
+
   roles UserRole[]
 
   @@unique([clerkId, userName, email])
@@ -44,4 +46,9 @@ enum Role {
   STUDENT
   INSTRUCTOR
   ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
 }

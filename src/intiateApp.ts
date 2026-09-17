@@ -4,7 +4,7 @@ import cors from "cors";
 import express, { Application, Request, Response } from "express";
 import morgan from "morgan";
 import { clerkWebhookHandler } from "./controllers/clerkWebHook.js";
-import authRouter from "./routes/auth.route.js";
+import * as routes from "./routes.js";
 import { MainAppName } from "./utils/constants/mainAppName.js";
 import { globalErrorHandler } from "@mustafahmed1997/learnify-backend";
 
@@ -43,7 +43,9 @@ export async function initiateApp(app: Application) {
     return res.send(`Hello ${MainAppName} !!`);
   });
 
-  app.use(baseURL, authRouter);
+  app.use(`${baseURL}/user`, routes.userRoutes);
+  app.use(`${baseURL}/role`, routes.roleRoutes);
+  app.use(`${baseURL}/instructorrequest`, routes.instructorRequestRoutes);
 
   app.use("/{*any}", (req: Request, res: Response) => {
     res.status(404).json({ error: "Auth service in-valid routing .. " });
