@@ -16,6 +16,8 @@ export async function addRoleService(
   // create UserRole
   // get all user roles
   // update Clerk metadata
+  //* Return message : "Role added. Authorization synchronization is pending."
+  //* with status : 202 Accepted
 }
 
 export async function removeRoleService(

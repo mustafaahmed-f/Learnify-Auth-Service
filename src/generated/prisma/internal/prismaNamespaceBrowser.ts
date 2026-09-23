@@ -104,6 +104,7 @@ export const OutboxEventScalarFieldEnum = {
   payload: 'payload',
   status: 'status',
   attempts: 'attempts',
+  nextAttemptAt: 'nextAttemptAt',
   createdAt: 'createdAt',
   processedAt: 'processedAt',
   lastError: 'lastError'

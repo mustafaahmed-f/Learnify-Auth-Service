@@ -47,11 +47,16 @@ model OutboxEvent {
   type        OutboxEventType
   aggregateId String
   payload     Json
-  status      OutboxStatus    @default(PENDING)
-  attempts    Int             @default(0)
-  createdAt   DateTime        @default(now())
+
+  status OutboxStatus @default(PENDING)
+
+  attempts      Int      @default(0)
+  nextAttemptAt DateTime @default(now())
+
+  createdAt   DateTime  @default(now())
   processedAt DateTime?
-  lastError   String?
+
+  lastError String?
 
   @@index([status, createdAt])
 }
