@@ -1,12 +1,14 @@
 import dotenv from "dotenv";
 import express, { Application } from "express";
 import { initiateApp } from "./intiateApp.js";
+import { outboxWorker } from "./worker/outboxWorker.js";
 dotenv.config();
 
 const app: Application = express();
 
 try {
   initiateApp(app);
+  // outboxWorker();
 } catch (error) {
   console.log("Auth service error : ", error);
 }
