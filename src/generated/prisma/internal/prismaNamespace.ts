@@ -399,6 +399,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   UserRole: 'UserRole',
+  instructorRequest: 'instructorRequest',
   OutboxEvent: 'OutboxEvent'
 } as const
 
@@ -415,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userRole" | "outboxEvent"
+    modelProps: "user" | "userRole" | "instructorRequest" | "outboxEvent"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -551,6 +552,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    instructorRequest: {
+      payload: Prisma.$instructorRequestPayload<ExtArgs>
+      fields: Prisma.instructorRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.instructorRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$instructorRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.instructorRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$instructorRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.instructorRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$instructorRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.instructorRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$instructorRequestPayload>
+        }
+        findMany: {
+          args: Prisma.instructorRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$instructorRequestPayload>[]
+        }
+        create: {
+          args: Prisma.instructorRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$instructorRequestPayload>
+        }
+        createMany: {
+          args: Prisma.instructorRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.instructorRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$instructorRequestPayload>
+        }
+        update: {
+          args: Prisma.instructorRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$instructorRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.instructorRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.instructorRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.instructorRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$instructorRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.InstructorRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInstructorRequest>
+        }
+        groupBy: {
+          args: Prisma.instructorRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InstructorRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.instructorRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InstructorRequestCountAggregateOutputType> | number
+        }
+      }
+    }
     OutboxEvent: {
       payload: Prisma.$OutboxEventPayload<ExtArgs>
       fields: Prisma.OutboxEventFieldRefs
@@ -666,7 +733,8 @@ export const UserScalarFieldEnum = {
   userName: 'userName',
   email: 'email',
   img: 'img',
-  status: 'status'
+  status: 'status',
+  instructorRequestBlockedAt: 'instructorRequestBlockedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -681,6 +749,22 @@ export const UserRoleScalarFieldEnum = {
 export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
 
 
+export const InstructorRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  message: 'message',
+  reviewMessage: 'reviewMessage',
+  status: 'status',
+  isEdited: 'isEdited',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  decidedAt: 'decidedAt',
+  decidedBy: 'decidedBy'
+} as const
+
+export type InstructorRequestScalarFieldEnum = (typeof InstructorRequestScalarFieldEnum)[keyof typeof InstructorRequestScalarFieldEnum]
+
+
 export const OutboxEventScalarFieldEnum = {
   id: 'id',
   type: 'type',
@@ -690,6 +774,7 @@ export const OutboxEventScalarFieldEnum = {
   attempts: 'attempts',
   nextAttemptAt: 'nextAttemptAt',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   processedAt: 'processedAt',
   lastError: 'lastError'
 } as const
@@ -710,6 +795,14 @@ export const JsonNullValueInput = {
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const UserOrderByRelevanceFieldEnum = {
@@ -733,6 +826,17 @@ export const UserRoleOrderByRelevanceFieldEnum = {
 export type UserRoleOrderByRelevanceFieldEnum = (typeof UserRoleOrderByRelevanceFieldEnum)[keyof typeof UserRoleOrderByRelevanceFieldEnum]
 
 
+export const instructorRequestOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  message: 'message',
+  reviewMessage: 'reviewMessage',
+  decidedBy: 'decidedBy'
+} as const
+
+export type instructorRequestOrderByRelevanceFieldEnum = (typeof instructorRequestOrderByRelevanceFieldEnum)[keyof typeof instructorRequestOrderByRelevanceFieldEnum]
+
+
 export const JsonNullValueFilter = {
   DbNull: DbNull,
   JsonNull: JsonNull,
@@ -748,14 +852,6 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const OutboxEventOrderByRelevanceFieldEnum = {
@@ -798,6 +894,20 @@ export type EnumUserStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
  * Reference to a field of type 'Role'
  */
 export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
+    
+
+
+/**
+ * Reference to a field of type 'InstructorRequestStatus'
+ */
+export type EnumInstructorRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InstructorRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -995,6 +1105,7 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   userRole?: Prisma.UserRoleOmit
+  instructorRequest?: Prisma.instructorRequestOmit
   outboxEvent?: Prisma.OutboxEventOmit
 }
 

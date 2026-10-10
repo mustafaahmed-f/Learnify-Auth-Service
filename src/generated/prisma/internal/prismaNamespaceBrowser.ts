@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   UserRole: 'UserRole',
+  instructorRequest: 'instructorRequest',
   OutboxEvent: 'OutboxEvent'
 } as const
 
@@ -82,7 +83,8 @@ export const UserScalarFieldEnum = {
   userName: 'userName',
   email: 'email',
   img: 'img',
-  status: 'status'
+  status: 'status',
+  instructorRequestBlockedAt: 'instructorRequestBlockedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -97,6 +99,22 @@ export const UserRoleScalarFieldEnum = {
 export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
 
 
+export const InstructorRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  message: 'message',
+  reviewMessage: 'reviewMessage',
+  status: 'status',
+  isEdited: 'isEdited',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  decidedAt: 'decidedAt',
+  decidedBy: 'decidedBy'
+} as const
+
+export type InstructorRequestScalarFieldEnum = (typeof InstructorRequestScalarFieldEnum)[keyof typeof InstructorRequestScalarFieldEnum]
+
+
 export const OutboxEventScalarFieldEnum = {
   id: 'id',
   type: 'type',
@@ -106,6 +124,7 @@ export const OutboxEventScalarFieldEnum = {
   attempts: 'attempts',
   nextAttemptAt: 'nextAttemptAt',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   processedAt: 'processedAt',
   lastError: 'lastError'
 } as const
@@ -126,6 +145,14 @@ export const JsonNullValueInput = {
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const UserOrderByRelevanceFieldEnum = {
@@ -149,6 +176,17 @@ export const UserRoleOrderByRelevanceFieldEnum = {
 export type UserRoleOrderByRelevanceFieldEnum = (typeof UserRoleOrderByRelevanceFieldEnum)[keyof typeof UserRoleOrderByRelevanceFieldEnum]
 
 
+export const instructorRequestOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  message: 'message',
+  reviewMessage: 'reviewMessage',
+  decidedBy: 'decidedBy'
+} as const
+
+export type instructorRequestOrderByRelevanceFieldEnum = (typeof instructorRequestOrderByRelevanceFieldEnum)[keyof typeof instructorRequestOrderByRelevanceFieldEnum]
+
+
 export const JsonNullValueFilter = {
   DbNull: DbNull,
   JsonNull: JsonNull,
@@ -164,14 +202,6 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const OutboxEventOrderByRelevanceFieldEnum = {

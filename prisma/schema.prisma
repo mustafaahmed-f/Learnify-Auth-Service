@@ -26,7 +26,10 @@ model User {
 
   status UserStatus @default(ACTIVE)
 
-  roles UserRole[]
+  roles              UserRole[]
+  instructorRequests instructorRequest[]
+
+  instructorRequestBlockedAt DateTime?
 
   @@unique([clerkId, userName, email])
 }
@@ -42,6 +45,28 @@ model UserRole {
   @@index([userId])
 }
 
+model instructorRequest {
+  id     String @id @default(cuid())
+  userId String
+
+  message       String  @db.Text
+  reviewMessage String? @db.Text
+
+  status InstructorRequestStatus @default(PENDING)
+
+  isEdited Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  decidedAt DateTime?
+  decidedBy String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
 model OutboxEvent {
   id          String          @id @default(cuid())
   type        OutboxEventType
@@ -54,11 +79,18 @@ model OutboxEvent {
   nextAttemptAt DateTime @default(now())
 
   createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now())
   processedAt DateTime?
 
   lastError String?
 
   @@index([status, createdAt])
+}
+
+enum InstructorRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 enum OutboxStatus {

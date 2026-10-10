@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const InstructorRequestStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type InstructorRequestStatus = (typeof InstructorRequestStatus)[keyof typeof InstructorRequestStatus]
+
+
 export const OutboxStatus = {
   PENDING: 'PENDING',
   PROCESSED: 'PROCESSED',

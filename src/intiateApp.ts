@@ -1,61 +1,71 @@
-import { clerkMiddleware } from "@clerk/express";
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import express, { Application, Request, Response } from "express";
-import morgan from "morgan";
-import { clerkWebhookHandler } from "./controllers/clerkWebHook.js";
-import * as routes from "./routes.js";
-import { MainAppName } from "./utils/constants/mainAppName.js";
-import { globalErrorHandler } from "@mustafahmed1997/learnify-backend";
+import { clerkMiddleware } from '@clerk/express';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import express, { Application, Request, Response } from 'express';
+import morgan from 'morgan';
+import { clerkWebhookHandler } from './controllers/clerkWebHook.js';
+import * as routes from './routes.js';
+import { MainAppName } from './utils/constants/mainAppName.js';
+import { globalErrorHandler } from '@mustafahmed1997/learnify-backend';
 
 export async function initiateApp(app: Application) {
-  const baseURL = `/${MainAppName}`;
-  const port = process.env.PORT || 7001;
+    const baseURL = `/${MainAppName}`;
+    const port = process.env.PORT || 7001;
 
-  app.use(clerkMiddleware());
+    app.use(clerkMiddleware());
 
-  app.post(
-    `${baseURL}/webhooks/clerk`,
-    express.raw({ type: "application/json" }),
-    clerkWebhookHandler,
-  );
+    app.post(
+        `${baseURL}/webhooks/clerk`,
+        express.raw({ type: 'application/json' }),
+        clerkWebhookHandler
+    );
 
-  app.use(express.json());
+    app.use(express.json());
 
-  app.use(cookieParser());
+    app.use(cookieParser());
 
-  app.use(morgan("dev"));
-  app.set("trust proxy", true);
+    app.use(morgan('dev'));
+    app.set('trust proxy', true);
 
-  const allowedOrigins = ["http://localhost:3000"];
+    const allowedOrigins = ['http://localhost:3000'];
 
-  app.use(
-    cors({
-      origin: allowedOrigins,
-      // origin: "*",
-      allowedHeaders: ["Content-Type", "Authorization", "x-client-id"],
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "QUERY"], // allow all methods you need
-      credentials: true,
-    }),
-  );
+    app.use(
+        cors({
+            origin: allowedOrigins,
+            // origin: "*",
+            allowedHeaders: ['Content-Type', 'Authorization', 'x-client-id'],
+            methods: [
+                'GET',
+                'POST',
+                'PUT',
+                'DELETE',
+                'OPTIONS',
+                'PATCH',
+                'QUERY',
+            ], // allow all methods you need
+            credentials: true,
+        })
+    );
 
-  app.get(baseURL, (req: Request, res: Response) => {
-    return res.send(`Hello ${MainAppName} !!`);
-  });
+    app.get(baseURL, (req: Request, res: Response) => {
+        return res.send(`Hello ${MainAppName} !!`);
+    });
 
-  app.use(`${baseURL}/user`, routes.userRoutes);
-  app.use(`${baseURL}/role`, routes.roleRoutes);
-  app.use(`${baseURL}/instructorrequest`, routes.instructorRequestRoutes);
+    app.use(`${baseURL}/user`, routes.userRoutes);
+    app.use(`${baseURL}/role`, routes.roleRoutes);
+    app.use(`${baseURL}/instructor-request`, routes.instructorRequestRoutes);
 
-  app.use("/{*any}", (req: Request, res: Response) => {
-    res.status(404).json({ error: "Auth service in-valid routing .. " });
-  });
+    app.use('/{*any}', (req: Request, res: Response) => {
+        res.status(404).json({ error: 'Auth service in-valid routing .. ' });
+    });
 
-  app.use(globalErrorHandler);
+    app.use(globalErrorHandler);
 
-  app.listen(port, () =>
-    console.log(`${process.env.APP_PURPOSE} Server is running on port ${port}`),
-  );
+    app.listen(port, () =>
+        console.log(
+            `${process.env.APP_PURPOSE} Server is running on port ${port}`
+        )
+    );
 
-  return app;
+    return app;
 }

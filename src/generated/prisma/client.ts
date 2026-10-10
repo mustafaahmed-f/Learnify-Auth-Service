@@ -52,6 +52,11 @@ export type User = Prisma.UserModel
  */
 export type UserRole = Prisma.UserRoleModel
 /**
+ * Model instructorRequest
+ * 
+ */
+export type instructorRequest = Prisma.instructorRequestModel
+/**
  * Model OutboxEvent
  * 
  */
