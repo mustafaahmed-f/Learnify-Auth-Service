@@ -15,7 +15,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "commit": "node --loader ts-node/esm scripts/generate-commit.ts",
     "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check"
+    "fmt:check": "oxfmt --check",
+    "db:seed:users": "tsx prisma/seed/seed-users.ts"
   },
   "dependencies": {
     "@clerk/express": "^1.7.74",
