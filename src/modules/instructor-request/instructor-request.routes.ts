@@ -19,6 +19,7 @@ const router = Router();
 
 router.use(checkAuth);
 
+//* CRUD operations by owner
 router.post(
     '/',
     checkRole(['STUDENT'], { mode: 'Exact' }),
@@ -38,12 +39,12 @@ router.patch(
 );
 
 //* User get his requests
-router.get('/me', checkRole(['STUDENT'], { mode: 'Exact' }), getMyRequests);
+router.get('/me', getMyRequests);
 
 //* Get single request
 router.get(
     '/:requestId',
-    checkRole(['STUDENT', 'ADMIN'], { mode: 'Any' }),
+
     getSingleRequest
 );
 
