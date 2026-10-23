@@ -759,7 +759,8 @@ export const InstructorRequestScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   decidedAt: 'decidedAt',
-  decidedBy: 'decidedBy'
+  decidedBy: 'decidedBy',
+  pendingKey: 'pendingKey'
 } as const
 
 export type InstructorRequestScalarFieldEnum = (typeof InstructorRequestScalarFieldEnum)[keyof typeof InstructorRequestScalarFieldEnum]
@@ -831,7 +832,8 @@ export const instructorRequestOrderByRelevanceFieldEnum = {
   userId: 'userId',
   message: 'message',
   reviewMessage: 'reviewMessage',
-  decidedBy: 'decidedBy'
+  decidedBy: 'decidedBy',
+  pendingKey: 'pendingKey'
 } as const
 
 export type instructorRequestOrderByRelevanceFieldEnum = (typeof instructorRequestOrderByRelevanceFieldEnum)[keyof typeof instructorRequestOrderByRelevanceFieldEnum]

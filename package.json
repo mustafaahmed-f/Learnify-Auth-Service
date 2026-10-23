@@ -1,52 +1,52 @@
 {
-  "name": "nodejs-typescript-template",
-  "version": "1.0.0",
-  "description": "",
-  "keywords": [],
-  "license": "ISC",
-  "author": "sezRR",
-  "type": "module",
-  "main": "./dist/index.js",
-  "exports": "./dist/index.js",
-  "scripts": {
-    "build": "tsc",
-    "prod": "node dist/index.js",
-    "dev": "tsx watch src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "commit": "node --loader ts-node/esm scripts/generate-commit.ts",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
-    "db:seed:users": "tsx prisma/seed/seed-users.ts"
-  },
-  "dependencies": {
-    "@clerk/express": "^1.7.74",
-    "@mustafahmed1997/learnify-backend": "^1.4.0",
-    "@prisma/adapter-mariadb": "^7.4.0",
-    "@prisma/client": "^7.4.0",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.6",
-    "dotenv": "^17.3.1",
-    "express": "^5.1.0",
-    "http-status-codes": "^2.3.0",
-    "morgan": "^1.10.1",
-    "svix": "^1.86.0",
-    "zod": "^4.5.4"
-  },
-  "devDependencies": {
-    "@types/cookie-parser": "^1.4.10",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
-    "@types/morgan": "^1.9.10",
-    "@types/node": "^20.19.39",
-    "nodemon": "^3.0.1",
-    "oxfmt": "^0.35.0",
-    "prettier": "^3.9.9",
-    "prisma": "^7.4.0",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.23.13",
-    "typescript": "^5.1.6"
-  },
-  "lint-staged": {
-    "*": "oxfmt --no-error-on-unmatched-pattern"
-  }
+    "name": "nodejs-typescript-template",
+    "version": "1.0.0",
+    "description": "",
+    "keywords": [],
+    "license": "ISC",
+    "author": "Mustafa Ahmed",
+    "type": "module",
+    "main": "./dist/index.js",
+    "exports": "./dist/index.js",
+    "scripts": {
+        "build": "tsc",
+        "prod": "node dist/index.js",
+        "dev": "tsx watch src/index.ts",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "commit": "node --loader ts-node/esm scripts/generate-commit.ts",
+        "fmt": "oxfmt",
+        "fmt:check": "oxfmt --check",
+        "db:seed:users": "tsx prisma/seed/seed-users.ts"
+    },
+    "dependencies": {
+        "@clerk/express": "^1.7.74",
+        "@mustafahmed1997/learnify-backend": "^1.9.0",
+        "@prisma/adapter-mariadb": "^7.4.0",
+        "@prisma/client": "^7.4.0",
+        "cookie-parser": "^1.4.7",
+        "cors": "^2.8.6",
+        "dotenv": "^17.3.1",
+        "express": "^5.1.0",
+        "http-status-codes": "^2.3.0",
+        "morgan": "^1.10.1",
+        "svix": "^1.86.0",
+        "zod": "^4.5.4"
+    },
+    "devDependencies": {
+        "@types/cookie-parser": "^1.4.10",
+        "@types/cors": "^2.8.19",
+        "@types/express": "^5.0.3",
+        "@types/morgan": "^1.9.10",
+        "@types/node": "^20.19.39",
+        "nodemon": "^3.0.1",
+        "oxfmt": "^0.35.0",
+        "prettier": "^3.9.9",
+        "prisma": "^7.4.0",
+        "ts-node": "^10.9.2",
+        "tsx": "^4.23.13",
+        "typescript": "^5.1.6"
+    },
+    "lint-staged": {
+        "*": "oxfmt --no-error-on-unmatched-pattern"
+    }
 }

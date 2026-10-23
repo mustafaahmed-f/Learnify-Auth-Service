@@ -62,9 +62,11 @@ model instructorRequest {
   decidedAt DateTime?
   decidedBy String?
 
+  pendingKey String? @unique //* set it to user's id to prevent double pending requests
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([userId])
+  @@index([userId, createdAt])
 }
 
 model OutboxEvent {

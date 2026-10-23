@@ -4,9 +4,9 @@ import {
     validationMiddleware,
 } from '@mustafahmed1997/learnify-backend';
 import { Router } from 'express';
-import { submitRequestSchema } from './validations/submitRequest.validation.js';
+import { submitRequestBodySchema } from './validations/submitRequest.validation.js';
 import { submitRequest } from './controllers/submitRequest.js';
-import { cancelRequestSchema } from './validations/cancelRequest.validation.js';
+import { cancelRequestParamsSchema } from './validations/cancelRequest.validation.js';
 import { cancelRequest } from './controllers/cancelRequest.js';
 import { approveRequest } from './controllers/approveRequest.js';
 import { editRequest } from './controllers/editRequest.js';
@@ -14,6 +14,10 @@ import { getMyRequests } from './controllers/getMyRequests.js';
 import { getSingleRequest } from './controllers/getSingleRequest.js';
 import { getAllRequests } from './controllers/getAllRequests.js';
 import { rejectRequest } from './controllers/rejectRequest.js';
+import {
+    editRequestParamsSchema,
+    editRequestBodySchema,
+} from './validations/editRequest.validation.js';
 
 const router = Router();
 
@@ -23,18 +27,22 @@ router.use(checkAuth);
 router.post(
     '/',
     checkRole(['STUDENT'], { mode: 'Exact' }),
-    validationMiddleware({ body: submitRequestSchema }),
+    validationMiddleware({ body: submitRequestBodySchema }),
     submitRequest
 );
 router.delete(
     '/:requestId',
     checkRole(['STUDENT'], { mode: 'Exact' }),
-    validationMiddleware({ body: cancelRequestSchema }),
+    validationMiddleware({ params: cancelRequestParamsSchema }),
     cancelRequest
 );
 router.patch(
     '/:requestId',
     checkRole(['STUDENT'], { mode: 'Exact' }),
+    validationMiddleware({
+        params: editRequestParamsSchema,
+        body: editRequestBodySchema,
+    }),
     editRequest
 );
 
@@ -42,11 +50,7 @@ router.patch(
 router.get('/me', getMyRequests);
 
 //* Get single request
-router.get(
-    '/:requestId',
-
-    getSingleRequest
-);
+router.get('/:requestId', getSingleRequest);
 
 //* Admin get all requests
 router.get('/allRequests', checkRole(['ADMIN']), getAllRequests);

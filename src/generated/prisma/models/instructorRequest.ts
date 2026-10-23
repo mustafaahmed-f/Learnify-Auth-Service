@@ -35,6 +35,7 @@ export type InstructorRequestMinAggregateOutputType = {
   updatedAt: Date | null
   decidedAt: Date | null
   decidedBy: string | null
+  pendingKey: string | null
 }
 
 export type InstructorRequestMaxAggregateOutputType = {
@@ -48,6 +49,7 @@ export type InstructorRequestMaxAggregateOutputType = {
   updatedAt: Date | null
   decidedAt: Date | null
   decidedBy: string | null
+  pendingKey: string | null
 }
 
 export type InstructorRequestCountAggregateOutputType = {
@@ -61,6 +63,7 @@ export type InstructorRequestCountAggregateOutputType = {
   updatedAt: number
   decidedAt: number
   decidedBy: number
+  pendingKey: number
   _all: number
 }
 
@@ -76,6 +79,7 @@ export type InstructorRequestMinAggregateInputType = {
   updatedAt?: true
   decidedAt?: true
   decidedBy?: true
+  pendingKey?: true
 }
 
 export type InstructorRequestMaxAggregateInputType = {
@@ -89,6 +93,7 @@ export type InstructorRequestMaxAggregateInputType = {
   updatedAt?: true
   decidedAt?: true
   decidedBy?: true
+  pendingKey?: true
 }
 
 export type InstructorRequestCountAggregateInputType = {
@@ -102,6 +107,7 @@ export type InstructorRequestCountAggregateInputType = {
   updatedAt?: true
   decidedAt?: true
   decidedBy?: true
+  pendingKey?: true
   _all?: true
 }
 
@@ -188,6 +194,7 @@ export type InstructorRequestGroupByOutputType = {
   updatedAt: Date
   decidedAt: Date | null
   decidedBy: string | null
+  pendingKey: string | null
   _count: InstructorRequestCountAggregateOutputType | null
   _min: InstructorRequestMinAggregateOutputType | null
   _max: InstructorRequestMaxAggregateOutputType | null
@@ -222,6 +229,7 @@ export type instructorRequestWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"instructorRequest"> | Date | string
   decidedAt?: Prisma.DateTimeNullableFilter<"instructorRequest"> | Date | string | null
   decidedBy?: Prisma.StringNullableFilter<"instructorRequest"> | string | null
+  pendingKey?: Prisma.StringNullableFilter<"instructorRequest"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -236,12 +244,14 @@ export type instructorRequestOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   decidedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  pendingKey?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   _relevance?: Prisma.instructorRequestOrderByRelevanceInput
 }
 
 export type instructorRequestWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  pendingKey?: string
   AND?: Prisma.instructorRequestWhereInput | Prisma.instructorRequestWhereInput[]
   OR?: Prisma.instructorRequestWhereInput[]
   NOT?: Prisma.instructorRequestWhereInput | Prisma.instructorRequestWhereInput[]
@@ -255,7 +265,7 @@ export type instructorRequestWhereUniqueInput = Prisma.AtLeast<{
   decidedAt?: Prisma.DateTimeNullableFilter<"instructorRequest"> | Date | string | null
   decidedBy?: Prisma.StringNullableFilter<"instructorRequest"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "pendingKey">
 
 export type instructorRequestOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -268,6 +278,7 @@ export type instructorRequestOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   decidedBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  pendingKey?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.instructorRequestCountOrderByAggregateInput
   _max?: Prisma.instructorRequestMaxOrderByAggregateInput
   _min?: Prisma.instructorRequestMinOrderByAggregateInput
@@ -287,6 +298,7 @@ export type instructorRequestScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"instructorRequest"> | Date | string
   decidedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"instructorRequest"> | Date | string | null
   decidedBy?: Prisma.StringNullableWithAggregatesFilter<"instructorRequest"> | string | null
+  pendingKey?: Prisma.StringNullableWithAggregatesFilter<"instructorRequest"> | string | null
 }
 
 export type instructorRequestCreateInput = {
@@ -299,6 +311,7 @@ export type instructorRequestCreateInput = {
   updatedAt?: Date | string
   decidedAt?: Date | string | null
   decidedBy?: string | null
+  pendingKey?: string | null
   user: Prisma.UserCreateNestedOneWithoutInstructorRequestsInput
 }
 
@@ -313,6 +326,7 @@ export type instructorRequestUncheckedCreateInput = {
   updatedAt?: Date | string
   decidedAt?: Date | string | null
   decidedBy?: string | null
+  pendingKey?: string | null
 }
 
 export type instructorRequestUpdateInput = {
@@ -325,6 +339,7 @@ export type instructorRequestUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   decidedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pendingKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutInstructorRequestsNestedInput
 }
 
@@ -339,6 +354,7 @@ export type instructorRequestUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   decidedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pendingKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type instructorRequestCreateManyInput = {
@@ -352,6 +368,7 @@ export type instructorRequestCreateManyInput = {
   updatedAt?: Date | string
   decidedAt?: Date | string | null
   decidedBy?: string | null
+  pendingKey?: string | null
 }
 
 export type instructorRequestUpdateManyMutationInput = {
@@ -364,6 +381,7 @@ export type instructorRequestUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   decidedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pendingKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type instructorRequestUncheckedUpdateManyInput = {
@@ -377,6 +395,7 @@ export type instructorRequestUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   decidedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pendingKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type InstructorRequestListRelationFilter = {
@@ -406,6 +425,7 @@ export type instructorRequestCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
   decidedBy?: Prisma.SortOrder
+  pendingKey?: Prisma.SortOrder
 }
 
 export type instructorRequestMaxOrderByAggregateInput = {
@@ -419,6 +439,7 @@ export type instructorRequestMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
   decidedBy?: Prisma.SortOrder
+  pendingKey?: Prisma.SortOrder
 }
 
 export type instructorRequestMinOrderByAggregateInput = {
@@ -432,6 +453,7 @@ export type instructorRequestMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
   decidedBy?: Prisma.SortOrder
+  pendingKey?: Prisma.SortOrder
 }
 
 export type instructorRequestCreateNestedManyWithoutUserInput = {
@@ -498,6 +520,7 @@ export type instructorRequestCreateWithoutUserInput = {
   updatedAt?: Date | string
   decidedAt?: Date | string | null
   decidedBy?: string | null
+  pendingKey?: string | null
 }
 
 export type instructorRequestUncheckedCreateWithoutUserInput = {
@@ -510,6 +533,7 @@ export type instructorRequestUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   decidedAt?: Date | string | null
   decidedBy?: string | null
+  pendingKey?: string | null
 }
 
 export type instructorRequestCreateOrConnectWithoutUserInput = {
@@ -552,6 +576,7 @@ export type instructorRequestScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"instructorRequest"> | Date | string
   decidedAt?: Prisma.DateTimeNullableFilter<"instructorRequest"> | Date | string | null
   decidedBy?: Prisma.StringNullableFilter<"instructorRequest"> | string | null
+  pendingKey?: Prisma.StringNullableFilter<"instructorRequest"> | string | null
 }
 
 export type instructorRequestCreateManyUserInput = {
@@ -564,6 +589,7 @@ export type instructorRequestCreateManyUserInput = {
   updatedAt?: Date | string
   decidedAt?: Date | string | null
   decidedBy?: string | null
+  pendingKey?: string | null
 }
 
 export type instructorRequestUpdateWithoutUserInput = {
@@ -576,6 +602,7 @@ export type instructorRequestUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   decidedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pendingKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type instructorRequestUncheckedUpdateWithoutUserInput = {
@@ -588,6 +615,7 @@ export type instructorRequestUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   decidedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pendingKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type instructorRequestUncheckedUpdateManyWithoutUserInput = {
@@ -600,6 +628,7 @@ export type instructorRequestUncheckedUpdateManyWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   decidedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pendingKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -615,6 +644,7 @@ export type instructorRequestSelect<ExtArgs extends runtime.Types.Extensions.Int
   updatedAt?: boolean
   decidedAt?: boolean
   decidedBy?: boolean
+  pendingKey?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["instructorRequest"]>
 
@@ -631,9 +661,10 @@ export type instructorRequestSelectScalar = {
   updatedAt?: boolean
   decidedAt?: boolean
   decidedBy?: boolean
+  pendingKey?: boolean
 }
 
-export type instructorRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "message" | "reviewMessage" | "status" | "isEdited" | "createdAt" | "updatedAt" | "decidedAt" | "decidedBy", ExtArgs["result"]["instructorRequest"]>
+export type instructorRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "message" | "reviewMessage" | "status" | "isEdited" | "createdAt" | "updatedAt" | "decidedAt" | "decidedBy" | "pendingKey", ExtArgs["result"]["instructorRequest"]>
 export type instructorRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -654,6 +685,7 @@ export type $instructorRequestPayload<ExtArgs extends runtime.Types.Extensions.I
     updatedAt: Date
     decidedAt: Date | null
     decidedBy: string | null
+    pendingKey: string | null
   }, ExtArgs["result"]["instructorRequest"]>
   composites: {}
 }
@@ -1034,6 +1066,7 @@ export interface instructorRequestFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"instructorRequest", 'DateTime'>
   readonly decidedAt: Prisma.FieldRef<"instructorRequest", 'DateTime'>
   readonly decidedBy: Prisma.FieldRef<"instructorRequest", 'String'>
+  readonly pendingKey: Prisma.FieldRef<"instructorRequest", 'String'>
 }
     
 

@@ -1,28 +1,28 @@
-import dotenv from "dotenv";
-import express, { Application } from "express";
-import { initiateApp } from "./intiateApp.js";
-import { outboxWorker } from "./worker/outboxWorker.js";
+import dotenv from 'dotenv';
+import express, { Application } from 'express';
+import { initiateApp } from './intiateApp.js';
+import { outboxWorker } from './worker/outboxWorker.js';
 dotenv.config();
 
 const app: Application = express();
 
 try {
-  initiateApp(app);
-  // outboxWorker();
+    initiateApp(app);
+    // outboxWorker();
 } catch (error) {
-  console.log("Auth service error : ", error);
+    console.log('Auth service error : ', error);
 }
 
-process.on("unhandledRejection", (reason, p) => {
-  console.error("Unhandled Promise Rejection:", reason);
+process.on('unhandledRejection', (reason, p) => {
+    console.error('Unhandled Promise Rejection:', reason);
 });
 
-process.on("uncaughtException", (err) => {
-  console.error("Uncaught Exception:", err);
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
 });
 
-process.on("uncaughtExceptionMonitor", (err) => {
-  console.error("Uncaught Exception (Monitor):", err);
+process.on('uncaughtExceptionMonitor', (err) => {
+    console.error('Uncaught Exception (Monitor):', err);
 });
 
 export default app;
