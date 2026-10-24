@@ -20,7 +20,7 @@
     },
     "dependencies": {
         "@clerk/express": "^1.7.74",
-        "@mustafahmed1997/learnify-backend": "^1.9.0",
+        "@mustafahmed1997/learnify-backend": "^2.0.0",
         "@prisma/adapter-mariadb": "^7.4.0",
         "@prisma/client": "^7.4.0",
         "cookie-parser": "^1.4.7",

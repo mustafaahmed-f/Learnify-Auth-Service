@@ -101,6 +101,12 @@ export async function submitRequest(
                     message,
                     pendingKey: userId,
                 },
+                select: {
+                    id: true,
+                    message: true,
+                    status: true,
+                    createdAt: true,
+                },
             });
         });
 
@@ -112,6 +118,7 @@ export async function submitRequest(
             })
         );
     } catch (error) {
+        console.log(`submitRequest : ${error}`);
         return handleCaughtError(error, next);
     }
 }
