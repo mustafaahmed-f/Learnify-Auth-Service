@@ -46,11 +46,11 @@ router.patch(
     editRequest
 );
 
-//* User get his requests
-router.get('/me', getMyRequests);
-
 //* Get single request
 router.get('/:requestId', getSingleRequest);
+
+//* User get his requests
+router.get('/me', getMyRequests);
 
 //* Admin get all requests
 router.get('/allRequests', checkRole(['ADMIN']), getAllRequests);
