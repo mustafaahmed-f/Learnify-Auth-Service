@@ -17,6 +17,20 @@ export async function cancelRequest(
         const userId = req.user?.userMetadata?.dbUserId;
 
         const result = await prisma.$transaction(async (tx) => {
+            //* 1. Lock the user row first to disallow race conditions
+            //* with submit request api.
+            const users = await tx.$queryRaw<{ id: string }[]>`
+                SELECT id
+                FROM \`User\`
+                WHERE id = ${userId}
+                FOR UPDATE
+            `;
+
+            if (users.length === 0) {
+                throw new AppError('User not found', StatusCodes.NOT_FOUND);
+            }
+
+            //* 2. Lock the request row to prevent concurrent modifications.
             const requests = await tx.$queryRaw<
                 { id: string; status: string }[]
             >`
@@ -31,6 +45,7 @@ export async function cancelRequest(
                 );
             }
 
+            //* 3. Check if the request is still pending.
             if (request.status !== 'PENDING') {
                 throw new AppError(
                     'Request is not pending and cannot be cancelled',
