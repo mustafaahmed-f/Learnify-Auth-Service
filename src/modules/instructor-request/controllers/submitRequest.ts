@@ -101,12 +101,6 @@ export async function submitRequest(
                     message,
                     pendingKey: userId,
                 },
-                select: {
-                    id: true,
-                    message: true,
-                    status: true,
-                    createdAt: true,
-                },
             });
         });
 
