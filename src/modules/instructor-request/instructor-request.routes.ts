@@ -18,6 +18,7 @@ import {
     editRequestParamsSchema,
     editRequestBodySchema,
 } from './validations/editRequest.validation.js';
+import { getAllRequestsQuerySchema } from './validations/getAllRequests.validation.js';
 
 const router = Router();
 
@@ -46,14 +47,19 @@ router.patch(
     editRequest
 );
 
-//* Get single request
-router.get('/:requestId', getSingleRequest);
+//* Admin get all requests
+router.get(
+    '/all',
+    checkRole(['ADMIN'], { mode: 'Exact' }),
+    validationMiddleware({ query: getAllRequestsQuerySchema }),
+    getAllRequests
+);
 
 //* User get his requests
 router.get('/me', getMyRequests);
 
-//* Admin get all requests
-router.get('/allRequests', checkRole(['ADMIN']), getAllRequests);
+//* Get single request
+router.get('/single/:requestId', getSingleRequest);
 
 //* Admin approve/reject request
 router.post('/approve/:requestId', checkRole(['ADMIN']), approveRequest);
