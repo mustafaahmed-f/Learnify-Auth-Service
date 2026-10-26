@@ -141,3 +141,29 @@ Each failure is logged as `<key> [<step>]: <reason>`. Passwords, keys, and token
   `STUDENT` and sets roles to `["STUDENT"]`. The seed waits briefly after creating
   users and then re-verifies both systems. If it reports **drift**, run it again.
 - Clerk rate limits apply. Users are processed one at a time.
+
+# Instructor Request Seed (MySQL only)
+
+`seed-instructor-requests.ts` upserts the 8 requests in `instructor-requests.data.ts`
+for the four managed seed users. It does not call Clerk, and it never creates,
+changes or deletes users.
+
+| User           | Earlier request | Later request |
+| -------------- | --------------- | ------------- |
+| `student-1`    | `REJECTED`      | `PENDING`     |
+| `student-2`    | `REJECTED`      | `PENDING`     |
+| `instructor-1` | `REJECTED`      | `APPROVED`    |
+| `instructor-2` | `REJECTED`      | `APPROVED`    |
+
+Users are looked up by their `userName` from `users.data.ts`. Their roles must match it
+exactly. `decidedBy` is the `admin-1` user's database id. Run `db:seed:users` first:
+
+```bash
+docker exec -w /app authservice-auth-service-dev-1 npm run db:seed:instructor-requests
+```
+
+- **Idempotent:** requests have fixed ids (`seed_ir_*`) and are upserted. Re-running
+  resets them to the seeded values, which also restores one that was cancelled through the API.
+- **Refuses to run** if a target user is missing, has unexpected roles, or already
+  has requests the seed did not create. Those would break the two-request limit and the
+  unique `pendingKey`. Nothing is written in that case.

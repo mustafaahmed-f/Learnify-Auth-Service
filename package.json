@@ -16,7 +16,8 @@
         "commit": "node --loader ts-node/esm scripts/generate-commit.ts",
         "fmt": "oxfmt",
         "fmt:check": "oxfmt --check",
-        "db:seed:users": "tsx prisma/seed/seed-users.ts"
+        "db:seed:users": "tsx prisma/seed/seed-users.ts",
+        "db:seed:instructor-requests": "tsx prisma/seed/seed-instructor-requests.ts"
     },
     "dependencies": {
         "@clerk/express": "^1.7.74",
